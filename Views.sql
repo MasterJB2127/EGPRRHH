@@ -32,4 +32,11 @@ INNER JOIN ESTADO_PERMISO ep
 on s.Estado = ep.Id_Estado
 where s.Estado != 3
 
+alter view V_Jefes
+as select c.DPI, c.Nombres + ' ' + c.Apellidos as Nombres, r.Rol from COLABORADO c
+inner join ROLES r
+on r.Id_Rol = c.id_rol
+where r.Id_Rol < 4
+
+
 /*EMPLEADOS BAJO MANDO DESDE JAVASCRIP ENVIANDO EL DPI DEL JEFE*/

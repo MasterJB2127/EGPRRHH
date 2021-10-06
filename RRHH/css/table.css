@@ -1,0 +1,15 @@
+.selected{
+    cursor: pointer;
+}
+.selected:hover{
+    background-color: gray;
+    color: white;
+}
+.scrollable{
+    height: 200px;
+    overflow: scroll;
+}
+.scrollable2{
+    height: 400px;
+    overflow: scroll;
+}
