@@ -1,6 +1,5 @@
 $(document).ready(function permiso(){
     var rol = atob(localStorage.getItem("key1"));
-    console.log(rol);
     // if(rol == "User"){
     // setTimeout("location.href='../Views/Home.html'");
     // error("No tiene permisos suficientes para acceder");

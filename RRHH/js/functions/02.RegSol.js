@@ -10,10 +10,12 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-$(document).ready(function permiso(){
+$(document).ready(function permiso() {
     var _dpi = atob(localStorage.getItem("key2"));
     document.getElementById('DPI').value = _dpi;
 });
+
+var user;
 
 function Registrar() {
 
@@ -37,11 +39,53 @@ function Registrar() {
 
         if (result == 1 || result == 2) {
             insertar();
+            const xhtttp = new XMLHttpRequest();
+            var _dpi = atob(localStorage.getItem("key2"));
+            xhtttp.open('GET', 'http://localhost:63642/api/V_Empleados', true);
+            xhtttp.send();
+            xhtttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var datos = JSON.parse(this.responseText);
+                    console.log(datos)
+                    
+                    var cont = 0;
+                    for (let item of datos) {
+                        cont++;
+                        if (item.DPI == _dpi) {
+                            var jefe = item.Id_Jefe;
+                            user = item.Nombre;
+                            const xhtttp = new XMLHttpRequest();
+                            xhtttp.open('GET', 'http://localhost:63642/api/V_Users', true);
+                            xhtttp.send();
+                            xhtttp.onreadystatechange = function () {
+                                if (this.readyState == 4 && this.status == 200) {
+                                    var datos = JSON.parse(this.responseText);
+                                    for (let item of datos) {
+                                        if (item.DPI == jefe) {
+                                            var mensaje = "TIENE UNA NUEVA SOLICITUD DE PERMISO DEL USUARIO: " + user + ", INGRESE AL SISTEMA PARA REVISAR LA SOLICITUD";
+                                            console.log(datos)
+                                            console.log(item.Correo);
+                                            console.log(mensaje);
+                                            $.post("http://localhost:63642/api/Correo", {
+                                                CorreoR: item.Correo,
+                                                Mensaje: mensaje
+                                            }, function (result) {
+                                                if(result == 1){
+                                                    Completado('NOTIFICACION ENVIADA A SU JEFE INMEDIATO')
+                                                }
+                                            }
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         } else {
             error(result.InnerException.Errors[0].message)
         }
-
-
     }
     )
 }
@@ -69,7 +113,7 @@ function insertar() {
                         if (db.ref('/Solicitudes/' + item.Id_Solicitud).set(data)) {
                             esperar();
                             setTimeout(function () {
-                                Completado('REGISTRO AGREGADO EXITOSAMENTE');
+                                Completado('SOLICITUD REGISTRADA EXITOSAMENTE');
                             }, 4500);
                         } else {
                             Error('HA OCURRIDO UN ERROR')
@@ -110,7 +154,7 @@ function convertToBase64() {
 }
 
 function ver() {
-    
+
     console.log(today)
 }
 

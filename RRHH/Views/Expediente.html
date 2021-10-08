@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" href="../img/chek.png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RRHH</title>
+</head>
+
+<body style="background-color:lightgray;">
+    <div style="background-color: white;"
+        class="container justify-content-center col-sm-12 col-md-12 col-lg-10 col-xl-10">
+
+        <nav style="background-color:  rgba(231, 231, 231, 0.75);"
+            class="navbar navbar-expand-lg navbar-expand-sm navbar-dark">
+            <span class="open-side" style="text-align: left;">
+                <br>
+                <a href="#" onclick="openSideMenu()">
+                    <svg width="30" height="30">
+                        <path d="M0,5 30,5" stroke="#111" stroke-width="5" />
+                        <path d="M0,14 30,14" stroke="#111" stroke-width="5" />
+                        <path d="M0,23 30,23" stroke="#111" stroke-width="5" />
+                    </svg>
+                    <br>
+                    <br>
+                </a>
+            </span>
+            <div id="side-menu" class="side-nav">
+                <a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
+                </button>
+            </div>
+        </nav>
+        <div class="card bg-light mb-3 container shadow-lg mt-4" style="background-color: rgba(96, 96, 96, 0.5);">
+            <div class="container">
+              <br>
+            </div>
+            <div class="card-header form-group">
+              <h1 style="text-align: center;color: black;">VER MI EXPEDIENTE</h1>
+            </div>
+            <div class="col-sm-10 col-md-6 col-lg-12 col-xl-12">
+                <br>
+                
+                <div class="row justify-content-center">
+                    <button style="text-align: center;" class="btn btn-outline-info" onclick="Exped()">VISUALIZAR EXPEDIENTE</button>
+                </div>
+            </div>
+            <div class="container col-11 mt-4" id="datos">
+                
+            </div>
+            <br>
+            <br>
+          </div>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <footer class="page-footer font-small blue" style="background-color: rgba(96, 96, 96, 0.5);">
+            <br>
+            <div class="footer-copyright text-center py-3">2020 Made By:
+              <h6 style="color: black;">Josué Isael Bonilla Matías</h6>
+            </div>
+          </footer>
+    </div>
+</body>
+
+</html>
+
+<script src="../js/resources/jquery-3.2.1.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+<link rel="stylesheet" href="../css/Celurean/bootstrap.css">
+<link rel="stylesheet" href="../css/table.css">
+<script src="../js/functions/In.js"></script>
+<script src="../js/functions/US.js"></script>
+<script src="../js/functions/AD.js"></script>
+<script src="../js/functions/menu.js"></script>
+<script src="../js/functions/06.VerExp.js"></script>
+<script src="../js/functions/ShowMenu.js"></script>
+<script src="../js/resources/toastr.min.js"></script>
+<link rel="stylesheet" href="../css/toastr.min.css">
+<link rel="stylesheet" href="../css/menu.css">

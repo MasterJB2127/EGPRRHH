@@ -33,7 +33,7 @@
             </div>
         </nav>
         <div class="container col-11 mt-4">
-            <h4 style="text-align: center; color: black;">Buscar Colaborador</h4>
+            <h4 style="text-align: center; color: black;">Visualizar Solicitudes Pendientes</h4>
             <div class="row mt-4">
                 <div class="col-sm-10 col-md-6 col-lg-12 col-xl-12">
                     <input id="buscar" type="text"
@@ -50,8 +50,13 @@
                         style="background-color: white;">
                         <thead class="thead-active">
                             <tr class="text-center">
+                                <th class="text-center">CODIGO DE SOLICITUD</th>
                                 <th class="text-center">DPI</th>
                                 <th class="text-center">NOMBRE</th>
+                                <th class="text-center">FECHA DE SOLICITUD</th>
+                                <th class="text-center">FECHA INICIAL DEL PERMISO</th>
+                                <th class="text-center">FECHA FINAL DEL PERMISO</th>
+                                <th class="text-center">TIPO DE PERMISO</th>
                             </tr>
                         </thead>
                         <tbody id="datos" class="text-center">
@@ -76,9 +81,9 @@
                         <div class="col-sm-5 col-md-10 col-lg-6 col-xl-6 mt-3">
                             <div class="form-group">
                                 <div class="form-group">
-                                    <h4 style="color:black; text-align: center; ">DPI: </h4>
+                                    <h4 style="color:black; text-align: center; ">CODIGO DE SOLICITUD: </h4>
                                     <br>
-                                    <input type="text" id="DPI" style="text-align: center; " class="form-control col-12"
+                                    <input type="text" id="sol" style="text-align: center; " class="form-control col-12"
                                         required disabled>
                                 </div>
                                 <br>
@@ -96,7 +101,13 @@
                     <br>
                     <div class="container col-12">
                         <div class="row justify-content-center">
-                            <button onclick="insertar()" class="btn btn-outline-info col-6">Regsitrar</button>
+                            <button onclick="Exped()" class="btn btn-outline-info col-3">VER SOLICITUD</button>
+                        </div>
+                        <br>
+                        <div class="row justify-content-center">
+                            <button onclick="" class="btn btn-outline-success col-3">APROBAR</button>
+                            <div class="col-1"></div>
+                            <button onclick="" class="btn btn-outline-danger col-3">RECHAZAR</button>
                         </div>
                     </div>
                     <div class="container">
@@ -130,7 +141,7 @@
 <script src="../js/functions/US.js"></script>
 <script src="../js/functions/AD.js"></script>
 <script src="../js/functions/menu.js"></script>
-<script src="../js/functions/04.Expedientes.js"></script>
+<script src="../js/functions/05.ApSl.js"></script>
 <script src="../js/functions/ShowMenu.js"></script>
 <script src="../js/resources/toastr.min.js"></script>
 <link rel="stylesheet" href="../css/toastr.min.css">
