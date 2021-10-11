@@ -1,11 +1,11 @@
 $(document).ready(function permiso(){
     var rol = atob(localStorage.getItem("key1"));
-    console.log(rol);
-    if(rol == "Operativo" || rol == "Gerente" || rol == "Administrativo"){
+    if(rol == "Operativo"){
     setTimeout("location.href='../Views/Home.html'");
-    }else if(rol == "RRHH"){
-
-    }else if(rol == ''){
+    error("No tiene permisos suficientes para acceder");
+    }else if(rol == "Gerente" || rol == "Administrativo"){
+    }else if(rol == "RRHH"){}
+    else{
     alert("Debe iniciar Sesión");
     setTimeout("location.href='../index.html'",1000);
     }

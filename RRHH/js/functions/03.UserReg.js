@@ -1,5 +1,6 @@
 function Registrar() {
-
+    //FALTA AGREGAR DPI DEL JEFE
+    var _dpiJ = atob(localStorage.getItem("key2"));
     var _dpi = $('#dpi').val();
     var _nombre = $('#nombre').val();
     var _apellido = $('#apellido').val();
@@ -18,7 +19,8 @@ function Registrar() {
         Id_Jefe: _jefe,
         Correo: _correo,
         Rol: _cargo,
-        Departamento: _depto
+        Departamento: _depto,
+        DPIJ: _dpiJ
     }, function (result) {
         if (result == 3) {
             esperar();

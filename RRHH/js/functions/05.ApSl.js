@@ -47,7 +47,6 @@ function Exped() {
 var keyrol;
 $(document).ready(function permiso() {
     keyrol = atob(localStorage.getItem("key1"));
-    console.log(keyrol)
 });
 
 function BUSCAR() {
@@ -90,9 +89,9 @@ function BUSCAR1() {
                     <td>${item.Id_Solicitud}</td>  
                     <td>${item.DPI}</td>
                     <td>${item.Nombre}</td>
-                    <td>${item.Fecha_Solicitud}</td>
-                    <td>${item.FechaI_Permiso}</td>
-                    <td>${item.FechaF_Permiso}</td>
+                    <td>${item.Fecha_Solicitud.slice(0, -9)}</td>
+                    <td>${item.FechaI_Permiso.slice(0, -9)}</td>
+                    <td>${item.FechaF_Permiso.slice(0, -9)}</td>
                     <td>${item.Descripcion}</td>
                         </tr>`
                 }
@@ -116,21 +115,23 @@ function BUSCAR2() {
                 cont++;
                 if (selector == '') {
                     res.innerHTML += `<tr class="selected" id="fila${cont}"  onclick="selectUser(this.id)">
-                        <td>${item.DPI}</td>
-                        <td>${item.Nombre}</td>
-                        <td>${item.Fecha_Solicitud.slice(0, -9)}</td>
-                        <td>${item.FechaI_Permiso.slice(0, -9)}</td>
-                        <td>${item.FechaF_Permiso.slice(0, -9)}</td>
-                        <td>${item.Descripcion}</td>
+                    <td>${item.Id_Solicitud}</td>  
+                    <td>${item.DPI}</td>
+                    <td>${item.Nombre}</td>
+                    <td>${item.Fecha_Solicitud.slice(0, -9)}</td>
+                    <td>${item.FechaI_Permiso.slice(0, -9)}</td>
+                    <td>${item.FechaF_Permiso.slice(0, -9)}</td>
+                    <td>${item.Descripcion}</td>
                         </tr>`
                 }
                 else if (item.Nombre.toUpperCase().indexOf(selector.toUpperCase()) > -1) {
                     res.innerHTML += `<tr class="selected" id="fila${cont}"  onclick="selectUser(this.id)">
+                    <td>${item.Id_Solicitud}</td>  
                     <td>${item.DPI}</td>
                     <td>${item.Nombre}</td>
-                    <td>${item.Fecha_Solicitud}</td>
-                    <td>${item.FechaI_Permiso}</td>
-                    <td>${item.FechaF_Permiso}</td>
+                    <td>${item.Fecha_Solicitud.slice(0, -9)}</td>
+                    <td>${item.FechaI_Permiso.slice(0, -9)}</td>
+                    <td>${item.FechaF_Permiso.slice(0, -9)}</td>
                     <td>${item.Descripcion}</td>
                         </tr>`
                 }
@@ -154,21 +155,23 @@ function BUSCAR3() {
                 cont++;
                 if (selector == '') {
                     res.innerHTML += `<tr class="selected" id="fila${cont}"  onclick="selectUser(this.id)">
-                        <td>${item.DPI}</td>
-                        <td>${item.Nombre}</td>
-                        <td>${item.Fecha_Solicitud.slice(0, -9)}</td>
-                        <td>${item.FechaI_Permiso.slice(0, -9)}</td>
-                        <td>${item.FechaF_Permiso.slice(0, -9)}</td>
-                        <td>${item.Descripcion}</td>
+                    <td>${item.Id_Solicitud}</td>  
+                    <td>${item.DPI}</td>
+                    <td>${item.Nombre}</td>
+                    <td>${item.Fecha_Solicitud.slice(0, -9)}</td>
+                    <td>${item.FechaI_Permiso.slice(0, -9)}</td>
+                    <td>${item.FechaF_Permiso.slice(0, -9)}</td>
+                    <td>${item.Descripcion}</td>
                         </tr>`
                 }
                 else if (item.Nombre.toUpperCase().indexOf(selector.toUpperCase()) > -1) {
                     res.innerHTML += `<tr class="selected" id="fila${cont}"  onclick="selectUser(this.id)">
+                    <td>${item.Id_Solicitud}</td>  
                     <td>${item.DPI}</td>
                     <td>${item.Nombre}</td>
-                    <td>${item.Fecha_Solicitud}</td>
-                    <td>${item.FechaI_Permiso}</td>
-                    <td>${item.FechaF_Permiso}</td>
+                    <td>${item.Fecha_Solicitud.slice(0, -9)}</td>
+                    <td>${item.FechaI_Permiso.slice(0, -9)}</td>
+                    <td>${item.FechaF_Permiso.slice(0, -9)}</td>
                     <td>${item.Descripcion}</td>
                         </tr>`
                 }
@@ -181,7 +184,9 @@ function selectUser(id_fila) {
     if (event.target.tagName == "TD") {
         var fila = event.target.parentNode;
         var cod1 = fila.children[0].innerHTML;
+        var cod2 = fila.children[1].innerHTML;
         document.getElementById('sol').value = cod1;
+        document.getElementById('dpi').value = cod2;
     }
 }
 
@@ -228,6 +233,314 @@ function insertar() {
     } else {
         alert('No hay Conexión a Internet');
     }
+}
+
+function APROBAR() {
+
+    if (keyrol == 'Administrativo') {
+        APJ();
+    } else if (keyrol == 'Gerente') {
+        APG();
+    } else if (keyrol == 'RRHH') {
+        APRRHH();
+    }
+}
+
+
+function APRRHH() {
+
+    var _dpi = atob(localStorage.getItem("key2"));
+    var _dpi2 = $('#dpi').val();
+
+    $.post("http://localhost:63642/api/APRRHH", {
+        DPIJ: _dpi,
+        DPIC: _dpi2
+    }, function (result) {
+        if (result == 2) {
+            esperar();
+            setTimeout(function () {
+                const xhtttp = new XMLHttpRequest();
+                xhtttp.open('GET', 'http://localhost:63642/api/V_Users', true);
+                xhtttp.send();
+                xhtttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var datos = JSON.parse(this.responseText);
+                        for (let item of datos) {
+                            if (item.DPI == _dpi2) {
+                                var mensaje = "SU SOLICITUD HA SIDO APROBADA POR RECURSOS HUMANOS";
+                                console.log(datos)
+                                console.log(item.Correo);
+                                console.log(mensaje);
+                                $.post("http://localhost:63642/api/Correo", {
+                                    CorreoR: item.Correo,
+                                    Mensaje: mensaje
+                                }
+                                )
+                            }
+                        }
+                    }
+                }
+                Completado("SOLICITUD APROBADA CORRECTAMENTE");
+            }, 4500);
+            setTimeout(function () {
+                location.reload()
+            }, 7000)
+        } else {
+            error(result.InnerException.Errors[0].message)
+        }
+    }
+    )
+}
+
+
+function APG() {
+
+    var _dpi = atob(localStorage.getItem("key2"));
+    var _dpi2 = $('#dpi').val();
+
+    $.post("http://localhost:63642/api/AP_G", {
+        DPIJ: _dpi,
+        DPIC: _dpi2
+    }, function (result) {
+        if (result == 2) {
+            esperar();
+            setTimeout(function () {
+                const xhtttp = new XMLHttpRequest();
+                xhtttp.open('GET', 'http://localhost:63642/api/V_Users', true);
+                xhtttp.send();
+                xhtttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var datos = JSON.parse(this.responseText);
+                        for (let item of datos) {
+                            if (item.DPI == _dpi2) {
+                                var mensaje = "SU SOLICITUD HA SIDO TRANSFERIDA A RECURSOS HUMANOS";
+                                console.log(datos)
+                                console.log(item.Correo);
+                                console.log(mensaje);
+                                $.post("http://localhost:63642/api/Correo", {
+                                    CorreoR: item.Correo,
+                                    Mensaje: mensaje
+                                }
+                                )
+                            }
+                        }
+                    }
+                }
+                Completado("SOLICITUD TRANSFERIDA A RECURSOS HUMANOS");
+            }, 4500);
+            setTimeout(function () {
+                location.reload()
+            }, 7000)
+        } else {
+            error(result.InnerException.Errors[0].message)
+        }
+    }
+    )
+}
+
+
+function APJ() {
+
+    var _dpi = atob(localStorage.getItem("key2"));
+    var _dpi2 = $('#dpi').val();
+
+    $.post("http://localhost:63642/api/AP_JI", {
+        DPIJ: _dpi,
+        DPIC: _dpi2
+    }, function (result) {
+        if (result == 2) {
+            esperar();
+            setTimeout(function () {
+                const xhtttp = new XMLHttpRequest();
+                xhtttp.open('GET', 'http://localhost:63642/api/V_Users', true);
+                xhtttp.send();
+                xhtttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var datos = JSON.parse(this.responseText);
+                        for (let item of datos) {
+                            if (item.DPI == _dpi2) {
+                                var mensaje = "SU SOLICITUD HA SIDO TRANSFERIDA AL GERENTE";
+                                console.log(datos)
+                                console.log(item.Correo);
+                                console.log(mensaje);
+                                $.post("http://localhost:63642/api/Correo", {
+                                    CorreoR: item.Correo,
+                                    Mensaje: mensaje
+                                }
+                                )
+                            }
+                        }
+                    }
+                }
+                Completado("SOLICITUD TRANSFERIDA AL GERENTE");
+            }, 4500);
+            setTimeout(function () {
+                location.reload()
+            }, 7000)
+        } else {
+            error(result.InnerException.Errors[0].message)
+        }
+    }
+    )
+}
+
+function RECHAZAR() {
+    var _obs = $('#obs').val();
+    if (_obs != '') {
+        if (keyrol == 'Administrativo') {
+            RCHJ();
+        } else if (keyrol == 'Gerente') {
+            RCHG();
+        } else if (keyrol == 'RRHH') {
+            RCHRRHH();
+        }
+    } else {
+        error('AGREGAR OBSERVACIÓN DEL POR QUÉ SE ESTÁ RECHAZANDO ESTA SOLICITUD')
+    }
+}
+
+
+function RCHRRHH() {
+
+    var _dpi = atob(localStorage.getItem("key2"));
+    var _dpi2 = $('#dpi').val();
+    var _obs = $('#obs').val();
+
+    $.post("http://localhost:63642/api/RCH_SRRHH", {
+        DPIJ: _dpi,
+        DPIC: _dpi2,
+        Observaciones: _obs
+    }, function (result) {
+        if (result == 2) {
+            esperar();
+            setTimeout(function () {
+                const xhtttp = new XMLHttpRequest();
+                xhtttp.open('GET', 'http://localhost:63642/api/V_Users', true);
+                xhtttp.send();
+                xhtttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var datos = JSON.parse(this.responseText);
+                        for (let item of datos) {
+                            if (item.DPI == _dpi2) {
+                                var mensaje = '<h3>SU SOLICITUD HA SIDO RECHAZADA POR RECURSOS HUMANOS DEBIDO A:</h3> <br> <h2 style=\"color: red;\">' + _obs.toUpperCase() + '</h2> <br> <h3>INGRESE AL SISTEMA PARA REVISAR LA INFORMACIÓN</h3>';
+                                console.log(datos)
+                                console.log(item.Correo);
+                                console.log(mensaje);
+                                $.post("http://localhost:63642/api/Correo", {
+                                    CorreoR: item.Correo,
+                                    Mensaje: mensaje
+                                }
+                                )
+                            }
+                        }
+                    }
+                }
+                Completado("SOLICITUD RECHAZADA CORRECTAMENTE");
+            }, 4500);
+            setTimeout(function () {
+                location.reload()
+            }, 7000)
+        } else {
+            error(result.InnerException.Errors[0].message)
+        }
+    }
+    )
+}
+
+
+function RCHG() {
+
+    var _dpi = atob(localStorage.getItem("key2"));
+    var _dpi2 = $('#dpi').val();
+    var _obs = $('#obs').val();
+
+    $.post("http://localhost:63642/api/RCH_SG", {
+        DPIJ: _dpi,
+        DPIC: _dpi2,
+        Observaciones: _obs
+    }, function (result) {
+        if (result == 2) {
+            esperar();
+            setTimeout(function () {
+                const xhtttp = new XMLHttpRequest();
+                xhtttp.open('GET', 'http://localhost:63642/api/V_Users', true);
+                xhtttp.send();
+                xhtttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var datos = JSON.parse(this.responseText);
+                        for (let item of datos) {
+                            if (item.DPI == _dpi2) {
+                                var mensaje = '<h3>SU SOLICITUD HA SIDO RECHAZADA POR EL GERENTE DEBIDO A:</h3> <br> <h2 style=\"color: red;\">' + _obs.toUpperCase() + '</h2> <br> <h3>INGRESE AL SISTEMA PARA REVISAR LA INFORMACIÓN</h3>';
+                                console.log(datos)
+                                console.log(item.Correo);
+                                console.log(mensaje);
+                                $.post("http://localhost:63642/api/Correo", {
+                                    CorreoR: item.Correo,
+                                    Mensaje: mensaje
+                                }
+                                )
+                            }
+                        }
+                    }
+                }
+                Completado("SOLICITUD RECHAZADA CORRECTAMENTE");
+            }, 4500);
+            setTimeout(function () {
+                location.reload()
+            }, 7000)
+        } else {
+            error(result.InnerException.Errors[0].message)
+        }
+    }
+    )
+}
+
+
+function RCHJ() {
+
+    var _dpi = atob(localStorage.getItem("key2"));
+    var _dpi2 = $('#dpi').val();
+    var _obs = $('#obs').val();
+
+    $.post("http://localhost:63642/api/RCH_SJ", {
+        DPIJ: _dpi,
+        DPIC: _dpi2,
+        Observaciones: _obs
+    }, function (result) {
+        if (result == 2) {
+            esperar();
+            setTimeout(function () {
+                const xhtttp = new XMLHttpRequest();
+                xhtttp.open('GET', 'http://localhost:63642/api/V_Users', true);
+                xhtttp.send();
+                xhtttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var datos = JSON.parse(this.responseText);
+                        for (let item of datos) {
+                            if (item.DPI == _dpi2) {
+                                var mensaje = '<h3>SU SOLICITUD HA SIDO RECHAZADA POR SU JEFE INMEDIATO DEBIDO A:</h3> <br> <h2 style=\"color: red;\">' + _obs.toUpperCase() + '</h2> <br> <h3>INGRESE AL SISTEMA PARA REVISAR LA INFORMACIÓN</h3>';
+                                console.log(datos)
+                                console.log(item.Correo);
+                                console.log(mensaje);
+                                $.post("http://localhost:63642/api/Correo", {
+                                    CorreoR: item.Correo,
+                                    Mensaje: mensaje
+                                }
+                                )
+                            }
+                        }
+                    }
+                }
+                Completado("SOLICITUD RECHAZADA CORRECTAMENTE");
+            }, 4500);
+            setTimeout(function () {
+                location.reload()
+            }, 7000)
+        } else {
+            error(result.InnerException.Errors[0].message)
+        }
+    }
+    )
 }
 
 function Completado(E) {

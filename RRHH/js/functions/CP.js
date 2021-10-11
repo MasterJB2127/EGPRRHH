@@ -4,10 +4,10 @@ function change() {
     var Np = $("#NP").val();
     var Cp = $("#CP").val();
     if (Np == Cp) {
-        $.post("http://192.168.128.17:4000/api/ChangePassword", {
-            DPI: user,
-            New_Password: Np,
-            Old_Password: Ap
+        $.post("http://localhost:63642/api/CONTRA", {
+            oldP: Ap,
+            newP: Np,
+            DPI: user
         }, function (result) {
 
             if (result == 1) {

@@ -65,7 +65,6 @@ function convertToBase64() {
         fileReader.onload = function (fileLoadedEvent) {
             base64 = fileLoadedEvent.target.result;
             // Print data in console
-            console.log(base64)
             file = base64;
         };
         // Convert data to base64
@@ -90,6 +89,25 @@ function insertar() {
             }, 4500);
         } else {
             Error('HA OCURRIDO UN ERROR')
+        }
+    } else {
+        alert('No hay Conexión a Internet');
+    }
+}
+
+function modificar() {
+    var _DPI = $('#DPI').val();
+
+    var data = {
+        DPI: _DPI,
+        Documento: file
+    }
+    if (navigator.onLine) {
+        var db = firebase.database();
+        if (db.ref('/Expedientes/' + _DPI).update(data)) {
+            setTimeout(function () {
+                Completado('EXPEDIENTE MODIFICADO');
+            }, 500);
         }
     } else {
         alert('No hay Conexión a Internet');

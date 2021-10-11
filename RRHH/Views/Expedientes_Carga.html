@@ -32,34 +32,7 @@
                 </button>
             </div>
         </nav>
-        <div class="container col-11 mt-4">
-            <h4 style="text-align: center; color: black;">Buscar Colaborador</h4>
-            <div class="row mt-4">
-                <div class="col-sm-10 col-md-6 col-lg-12 col-xl-12">
-                    <input id="buscar" type="text"
-                        placeholder="ESCRIBA NOMBRE DEL COLABORADOR"
-                        class="col-form-label col-sm-9 col-md-12 col-lg-12 col-xl-10">
-                    <button class="btn btn-outline-info" onclick="BUSCAR()">Buscar</button>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-sm-10 col-md-12 col-lg-12 col-xl-12">
-                <div class="form-group scrollable">
-                    <table class="table table-bordered table-sm rounded-2 mt-4"
-                        style="background-color: white;">
-                        <thead class="thead-active">
-                            <tr class="text-center">
-                                <th class="text-center">DPI</th>
-                                <th class="text-center">NOMBRE</th>
-                            </tr>
-                        </thead>
-                        <tbody id="datos" class="text-center">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+        
         <div class="container col-12">
             <div class="card bg-light mb-3 container shadow-lg mt-4 col-12"
                 style="background-color: rgba(96, 96, 96, 0.5);">
@@ -69,7 +42,30 @@
                 <div class="card-header form-group">
                     <h1 style="text-align: center;color: black;">CARGAR EXPEDIENTE</h1>
                 </div>
-
+                <br>
+                <div class="row col-12">
+                    <input id="buscar" type="text"
+                        placeholder="ESCRIBA NOMBRE DEL COLABORADOR"
+                        class="col-form-label col-sm-12 col-md-8 col-lg-9 col-xl-10">
+                        <button class="btn btn-outline-info col-sm-12 col-md-4 col-lg-3 col-xl-2" onclick="BUSCAR()">Buscar</button>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-sm-10 col-md-12 col-lg-12 col-xl-12">
+                        <div class="form-group scrollable">
+                            <table class="table table-bordered table-sm rounded-2 mt-4"
+                                style="background-color: white;">
+                                <thead class="thead-active">
+                                    <tr class="text-center">
+                                        <th class="text-center">DPI</th>
+                                        <th class="text-center">NOMBRE</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="datos" class="text-center">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 <div class="container col-12">
 
                     <div class="row">
@@ -89,14 +85,16 @@
                             <br>
                             <br>
                             <div class="form-group">
-                                <input id="inputFile" type="file" onchange="convertToBase64();" />
+                                <input id="inputFile" class="col-12" type="file" onchange="convertToBase64();" />
                             </div>
                         </div>
                     </div>
                     <br>
                     <div class="container col-12">
                         <div class="row justify-content-center">
-                            <button onclick="insertar()" class="btn btn-outline-info col-6">Regsitrar</button>
+                            <button onclick="insertar()" class="btn btn-outline-info col-5">CARGAR EXPEDIENTE</button>
+                            <div class="col-1"></div>
+                            <button onclick="modificar()" class="btn btn-outline-info col-5">MODIFICAR EXPEDIENTE</button>
                         </div>
                     </div>
                     <div class="container">
@@ -108,12 +106,12 @@
                 </div>
             </div>
         </div>
-        <footer class="page-footer font-small blue" style="background-color: rgba(96, 96, 96, 0.5);">
+        <footer class="page-footer font-small blue" style="background-color: rgba(96, 96, 96, 0.5); margin-top: 3%;">
             <br>
             <div class="footer-copyright text-center py-3">2021 Made By:
-                <h6 style="color: black;">Josué Isael Bonilla Matías</h6>
+              <h6 style="color: black;">Josué Isael Bonilla Matías</h6>
             </div>
-        </footer>
+          </footer>
         <script src="../js/resources/jquery-3.2.1.min.js"></script>
     </div>
 </body>
@@ -126,9 +124,8 @@
 <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
 <link rel="stylesheet" href="../css/Celurean/bootstrap.css">
 <link rel="stylesheet" href="../css/table.css">
-<script src="../js/functions/In.js"></script>
+<script src="../js/functions/01.In.js"></script>
 <script src="../js/functions/US.js"></script>
-<script src="../js/functions/AD.js"></script>
 <script src="../js/functions/menu.js"></script>
 <script src="../js/functions/04.Expedientes.js"></script>
 <script src="../js/functions/ShowMenu.js"></script>

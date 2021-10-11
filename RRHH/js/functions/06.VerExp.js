@@ -24,10 +24,8 @@ function downloadPDF() {
 }
 
 var dataPDF;
-
-function Exped() {
+$(document).ready(function Exped(){
     var _dpi = atob(localStorage.getItem("key2"));
-    console.log(_dpi);
 
     const menu = firebase.database().ref("Expedientes/");
     menu.on("value", function (snapshot) {
@@ -37,13 +35,12 @@ function Exped() {
             var data = childsnapshot.val();
             if (_dpi == data.DPI) {
                 dataPDF = data.Documento;
-                console.log(dataPDF)
                 downloadPDF();
             }
         }
         );
     })
-}
+});
 
 function error(E) {
     toastr.options = {
