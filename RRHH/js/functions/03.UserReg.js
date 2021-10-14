@@ -48,7 +48,7 @@ function VerUsuarios() {
             var datos = JSON.parse(this.responseText);
 
             let res = document.querySelector('#datos');
-            var selector = $('#selector').val();;
+            var selector = $('#selector').val();
             res.innerHTML = '';
             var cont = 0;
             for (let item of datos) {

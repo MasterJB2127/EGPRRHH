@@ -256,7 +256,7 @@ function APRRHH() {
         DPIJ: _dpi,
         DPIC: _dpi2
     }, function (result) {
-        if (result == 2) {
+        if (result > 0) {
             esperar();
             setTimeout(function () {
                 const xhtttp = new XMLHttpRequest();
@@ -268,9 +268,6 @@ function APRRHH() {
                         for (let item of datos) {
                             if (item.DPI == _dpi2) {
                                 var mensaje = "SU SOLICITUD HA SIDO APROBADA POR RECURSOS HUMANOS";
-                                console.log(datos)
-                                console.log(item.Correo);
-                                console.log(mensaje);
                                 $.post("http://localhost:63642/api/Correo", {
                                     CorreoR: item.Correo,
                                     Mensaje: mensaje

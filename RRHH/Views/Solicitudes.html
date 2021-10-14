@@ -40,24 +40,19 @@
                     <br>
                 </div>
                 <div class="card-header form-group">
-                    <h1 style="text-align: center;color: black;">GESTION DE EXPEDIENTES</h1>
-                </div>
-                <br>
-                <div class="row col-12">
-                    <input id="buscar" type="text"
-                        placeholder="ESCRIBA NOMBRE DEL COLABORADOR"
-                        class="col-form-label col-sm-12 col-md-8 col-lg-9 col-xl-10">
-                        <button class="btn btn-outline-info col-sm-12 col-md-4 col-lg-3 col-xl-2" onclick="BUSCAR()">Buscar</button>
+                    <h1 style="text-align: center;color: black;">VISTA DE MIS SOLICITUDES</h1>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-sm-10 col-md-12 col-lg-12 col-xl-12">
-                        <div class="form-group scrollable">
-                            <table class="table table-bordered table-sm rounded-2 mt-4"
-                                style="background-color: white;">
+                        <div class="form-group scrollable3">
+                            <table class="table table-bordered table-sm rounded-2 mt-4" style="background-color: white;">
                                 <thead class="thead-active">
                                     <tr class="text-center">
+                                        <th class="text-center">CODIGO DE SOLICITUD</th>
                                         <th class="text-center">DPI</th>
-                                        <th class="text-center">NOMBRE</th>
+                                        <th class="text-center">FECHA DE SOLICITUD</th>
+                                        <th class="text-center">ESTADO</th>
+                                        <th class="text-center">TIPO DE PERMISO</th>
                                     </tr>
                                 </thead>
                                 <tbody id="datos" class="text-center">
@@ -68,38 +63,25 @@
                 </div>
                 <div class="container col-12">
 
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <div class="col-sm-5 col-md-10 col-lg-6 col-xl-6 mt-3">
                             <div class="form-group">
                                 <div class="form-group">
-                                    <h4 style="color:black; text-align: center; ">DPI: </h4>
+                                    <h4 style="color:black; text-align: center; ">SOLICITUD SELECCIONADA: </h4>
                                     <br>
-                                    <input type="text" id="DPI" style="text-align: center; " class="form-control col-12"
+                                    <input type="text" id="sol" style="text-align: center; " class="form-control col-12"
                                         required disabled>
                                 </div>
                                 <br>
-                            </div>
-                        </div>
-                        <div class="col-sm-10 col-md-10 col-lg-6 col-xl-6 mt-3">
-                            <br>
-                            <br>
-                            <br>
-                            <div class="form-group">
-                                <input id="inputFile" class="col-12" type="file" onchange="convertToBase64();" />
                             </div>
                         </div>
                     </div>
                     <br>
                     <div class="container col-12">
                         <div class="row justify-content-center">
-                            <button onclick="Exp()" class="btn btn-outline-info col-5">VER EXPEDIENTE</button>
+                            <button onclick="Exp()" class="btn btn-outline-info col-3">VER SOLICITUD</button>
                         </div>
                         <br>
-                        <div class="row justify-content-center">
-                            <button onclick="insertar()" class="btn btn-outline-success col-5">CARGAR EXPEDIENTE</button>
-                            <div class="col-1"></div>
-                            <button onclick="modificar()" class="btn btn-outline-warning col-5">MODIFICAR EXPEDIENTE</button>
-                        </div>
                     </div>
                     <div class="container">
                         <br>
@@ -110,12 +92,12 @@
                 </div>
             </div>
         </div>
-        <footer class="page-footer font-small blue" style="background-color: rgba(96, 96, 96, 0.5); margin-top: 3%;">
+        <footer class="page-footer font-small blue" style="background-color: rgba(96, 96, 96, 0.5);">
             <br>
             <div class="footer-copyright text-center py-3">2021 Made By:
-              <h6 style="color: black;">Josué Isael Bonilla Matías</h6>
+                <h6 style="color: black;">Josué Isael Bonilla Matías</h6>
             </div>
-          </footer>
+        </footer>
         <script src="../js/resources/jquery-3.2.1.min.js"></script>
     </div>
 </body>
@@ -129,9 +111,9 @@
 <link rel="stylesheet" href="../css/Celurean/bootstrap.css">
 <link rel="stylesheet" href="../css/table.css">
 <script src="../js/functions/01.In.js"></script>
-<script src="../js/functions/US.js"></script>
+<script src="../js/functions/AD.js"></script>
 <script src="../js/functions/menu.js"></script>
-<script src="../js/functions/04.Expedientes.js"></script>
+<script src="../js/functions/08.Solicitudes.js"></script>
 <script src="../js/functions/ShowMenu.js"></script>
 <script src="../js/resources/toastr.min.js"></script>
 <link rel="stylesheet" href="../css/toastr.min.css">

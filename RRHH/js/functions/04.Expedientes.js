@@ -75,43 +75,90 @@ function convertToBase64() {
 function insertar() {
 
     var _DPI = $('#DPI').val();
+    var _inputFile = $('#inputFile').val();
 
     var data = {
         DPI: _DPI,
         Documento: file
     }
-    if (navigator.onLine) {
-        var db = firebase.database();
-        if (db.ref('/Expedientes/' + _DPI).set(data)) {
-            esperar();
-            setTimeout(function () {
-                Completado('REGISTRO AGREGADO EXITOSAMENTE');
-            }, 4500);
+    if(_inputFile != ''){
+        if (navigator.onLine) {
+            var db = firebase.database();
+            if (db.ref('/Expedientes/' + _DPI).set(data)) {
+                esperar();
+                setTimeout(function () {
+                    Completado('REGISTRO AGREGADO EXITOSAMENTE');
+                }, 4500);
+            } else {
+                Error('HA OCURRIDO UN ERROR')
+            }
         } else {
-            Error('HA OCURRIDO UN ERROR')
+            alert('No hay Conexión a Internet');
         }
-    } else {
-        alert('No hay Conexión a Internet');
+    }else{
+        error('DEBE CARGAR UN ARCHIVO');
     }
+
 }
 
 function modificar() {
     var _DPI = $('#DPI').val();
+    var _inputFile = $('#inputFile').val();
 
     var data = {
         DPI: _DPI,
         Documento: file
     }
-    if (navigator.onLine) {
-        var db = firebase.database();
-        if (db.ref('/Expedientes/' + _DPI).update(data)) {
-            setTimeout(function () {
-                Completado('EXPEDIENTE MODIFICADO');
-            }, 500);
+    if(_inputFile != ''){
+        if (navigator.onLine) {
+            var db = firebase.database();
+            if (db.ref('/Expedientes/' + _DPI).update(data)) {
+                setTimeout(function () {
+                    Completado('EXPEDIENTE MODIFICADO');
+                }, 500);
+            }
+        } else {
+            alert('No hay Conexión a Internet');
         }
-    } else {
-        alert('No hay Conexión a Internet');
+    }else{
+        error('DEBE CARGAR UN ARCHIVO');
     }
+}
+
+function Exp() {
+    var _DPI = $('#DPI').val();
+    if (_DPI != '') {
+        const menu = firebase.database().ref("Expedientes/");
+        menu.on("value", function (snapshot) {
+            $("#datos").empty();
+
+            snapshot.forEach(function (childsnapshot) {
+                var data = childsnapshot.val();
+                if (_DPI == data.DPI) {
+                    dataPDF = data.Documento;
+                    downloadPDF();
+                }
+            }
+            );
+        })
+    } else {
+        error('NO TIENE NINGUNA SOLICITUD SELECCIONADA')
+    }
+}
+
+var dataPDF;
+
+function downloadPDF() {
+    var binStr = atob(dataPDF.slice(28));
+    var len = binStr.length;
+    var arr = new Uint8Array(len);
+    for (var i = 0; i < len; i++) {
+        arr[i] = binStr.charCodeAt(i);
+    }
+    var blob = new Blob([arr], { type: "application/pdf" })
+    var url = URL.createObjectURL(blob);
+    var pdfWindow = window.open("");
+    pdfWindow.document.write("<iframe width='100%' height='100%' src='" + url + "'></iframe>");
 }
 
 
