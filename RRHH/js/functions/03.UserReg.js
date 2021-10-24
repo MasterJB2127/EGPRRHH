@@ -22,7 +22,7 @@ function Registrar() {
         Departamento: _depto,
         DPIJ: _dpiJ
     }, function (result) {
-        if (result == 3) {
+        if (result > 0) {
             esperar();
             setTimeout(function () {
                 Completado("USUARIO REGISTRADO CORRECTAMENTE");

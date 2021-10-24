@@ -76,7 +76,7 @@ function find() {
             var cont = 0;
             for (let item of datos) {
                 cont++;
-                var desc = item.Descripcion.toUpperCase();
+                var desc = item.Usuario.toUpperCase();
                 var fecha = item.Fecha.slice(0, -9);
                 if (selector != "" && _date != "") {
                     key = 2;

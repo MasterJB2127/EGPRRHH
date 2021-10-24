@@ -384,7 +384,7 @@ function Fecha_C() {
             error('NO ES VALIDO SELECCIONAR FINES DE SEMANA COMO FECHA INICIAL');
         }
     } else if (_TP == 6) {
-        if($('#V').val() == 0){
+        if($('#PE').val() == 0){
             error('NO CUENTA CON DIAS DISPONIBLES PARA PERMISO ESPECIAL')
             $('#FI').val('')
                 $('#FF').val('')
